@@ -11,11 +11,12 @@ class Plant:
         self._age += 1
 
     def show(self) -> None:
-        print(f"{self._name}: {self._height}cm, {self._age} days old")
+        print(f"{self._name}: {self._height:.1f}cm, {self._age} days old")
 
 
 if __name__ == "__main__":
     plant1 = Plant("Rose", 25.0, 30)
+    start_growth = plant1._height
     print("=== Garden Plant Growth ===")    
     i = 1
     while i <= 7:
@@ -24,3 +25,5 @@ if __name__ == "__main__":
         plant1.age()
         plant1.show()
         i += 1
+    growth = plant1._height - start_growth
+    print(f"Growth this week: {growth:.1f}cm")
