@@ -43,14 +43,15 @@ class Flower (Plant):
         self._bloom = bloom
 
     def bloom(self) -> None:
-        print(f"[asking the {self._name} to bloom]")
         self._bloom = True
 
     def show(self) -> None:   
-        print("=== Flower\n")
+        print("=== Flower")
         super().show()
+        print(f" Color: {self._color}")
         if self._bloom:
             print("Rose has not bloomed yet")
+            print(f"[asking the {self._name} to bloom]")
         else:
             print(f"{self._name} is blooming beautifully!")
 
@@ -67,9 +68,9 @@ class Tree (Plant):
               f"and {self._trunk_diameter}cm wide.")
 
     def show(self) -> None:   
-        print("=== Tree\n")
+        print("=== Tree")
         super().show()
-        print(f"Trunk diameter: {self._trunk_diameter}")
+        print(f"Trunk diameter: {self._trunk_diameter} cm")
 
 
 class Vegetables (Plant):
@@ -80,9 +81,9 @@ class Vegetables (Plant):
         self._nutritional_value = nutritional_value
 
     def show(self) -> None: 
-        print("=== Vegetable\n")
+        print("=== Vegetable")
         super().show()
-        print(f"Harvest season: {self._harvest_season}" +
+        print(f"Harvest season: {self._harvest_season}\n" +
               f"Nutritional value: {self._nutritional_value}")
       
     def set_nutritional_value(self, nutritional_value: int = 20) -> None:
@@ -91,19 +92,20 @@ class Vegetables (Plant):
     def grow_and_age(self, height: int = 42, age: int = 20) -> None:
         self._height = self._height + height
         self._age = self._age + age
+        self._nutritional_value = self._nutritional_value + age
         super().show()
-        print(f"{self._name}: {self._height}cm, {self._age} days old")
         print(f" Harvest season: {self._harvest_season}")
-        print(f" Nutritional value: {self._age}")
+        print(f" Nutritional value: {self._nutritional_value}")
 
 
 if __name__ == "__main__":
     print("=== Garden Plant Types ===")
-    rose = Flower("Rose", 15, 10, "red")
-    rose.show()
+    rose = Flower("rose", 15, 10, "red")
     rose.bloom()
+    rose.show()
     oak = Tree("Oak", 200, 365, 5)
     oak.show()
     oak.produce_shade()
     tomato = Vegetables("tomato", 5, 10, "April", 0)
+    tomato.show()
     tomato.grow_and_age()
