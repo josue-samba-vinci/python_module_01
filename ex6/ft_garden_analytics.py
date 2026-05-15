@@ -43,6 +43,14 @@ class Plant:
             print(f"{self._name}: Error, age can't be negative")
             print("Age update rejected")
 
+    def grow(self, height: float = 0.8) -> None:
+        self._height = round(self._height + height)
+        self._stats._grow += 1
+
+    def age(self, age: int = 1) -> None:
+        self._age = age + self._age
+        self._stats._age += 1
+
     @staticmethod
     def is_older(age: int) -> bool:
         if age > 365:
@@ -86,9 +94,23 @@ class Flower (Plant):
 
 class Seed (Flower):
     def __init__(self, name: str, height: float, age: int, color: str,
-                 bloom: bool = False) -> None:
+                 bloom: bool = False, seeds: int = 0) -> None:
         super().__init__(name, height, age, color, bloom)
-        self._seeds
+        self._seeds = seeds
+
+    def show(self) -> None:
+        super().show()
+        print(f"Seeds: {self._seeds}")
+        self._stats._show += 1
+
+    def grow_age_bloom(self) -> None:
+        self._stats._grow += 1
+        self._stats._age += 1
+        self._seeds += 42
+        self._height += 30
+        self._age += 20
+        self._bloom = True
+        print("[make sunflower grow, age and bloom]")
 
 
 class Tree (Plant):
@@ -116,31 +138,7 @@ class Tree (Plant):
     def show(self) -> None:
         super().show()
         print(f"Trunk diameter: {self._trunk_diameter:.1f} cm")
-
-
-class Vegetables (Plant):
-    def __init__(self, name: str, height: float, age: int, harvest_season: str,
-                 nutritional_value: int = 0) -> None:
-        super().__init__(name, height, age)
-        self._harvest_season = harvest_season
-        self._nutritional_value = nutritional_value
-
-    def show(self) -> None: 
-        print("=== Vegetable")
-        super().show()
-        print(f"Harvest season: {self._harvest_season}\n" +
-              f"Nutritional value: {self._nutritional_value}")
-      
-    def set_nutritional_value(self, nutritional_value: int = 20) -> None:
-        self._nutritional_value = nutritional_value
-
-    def grow_and_age(self, height: int = 42, age: int = 20) -> None:
-        self._height = self._height + height
-        self._age = self._age + age
-        self._nutritional_value = self._nutritional_value + age
-        super().show()
-        print(f" Harvest season: {self._harvest_season}")
-        print(f" Nutritional value: {self._nutritional_value}")
+        self._stats._show += 1
 
 
 if __name__ == "__main__":
@@ -154,16 +152,17 @@ if __name__ == "__main__":
     rose.bloom()
     rose.show()
     rose._stats.display(rose._name)
-
-
-    print("")
-    print("")
-    print("")
     print("")
     oak = Tree("Oak", 200, 365, 5)
     print("=== Tree")
     oak.show()
+    oak._stats.display(oak._name)
     oak.produce_shade()
-    tomato = Vegetables("tomato", 5, 10, "April", 0)
-    tomato.show()
-    tomato.grow_and_age()
+    oak._stats.display(oak._name)
+    print("")
+    sunflower = Seed("sunflower", 80, 45, "yellow")
+    print("=== Seed")
+    sunflower.show()
+    sunflower.grow_age_bloom()
+    sunflower.show()
+    sunflower._stats.display(sunflower._name)

@@ -33,7 +33,7 @@ class Plant:
             print("Age update rejected")
 
     def grow(self, height: float = 0.8) -> None:
-        self._height = round(self._height + height)
+        self._height = self._height + height
 
     def age(self, age: int = 1) -> None:
         self._age = age + self._age
@@ -44,7 +44,7 @@ class Plant:
 
 if __name__ == "__main__":
     print("=== Garden Security System ===")
-    rose = Plant("Rose", -2, -2)
+    rose = Plant("Rose", 15.0, 10)
     print("Plant created: ", end="")
     rose.show()
     print()

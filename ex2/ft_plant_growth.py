@@ -1,11 +1,11 @@
 class Plant:
     def __init__(self, name: str, height: float, age: int) -> None:
         self._name = name
-        self._height = round(height, 1)
+        self._height = height
         self._age = round(age)
 
     def grow(self, height: float = 0.8) -> None:
-        self._height = round(self._height + height)
+        self._height = self._height + height
 
     def age(self, age: int = 1) -> None:
         self._age = age + self._age
