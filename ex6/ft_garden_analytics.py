@@ -43,13 +43,16 @@ class Plant:
             print(f"{self._name}: Error, age can't be negative")
             print("Age update rejected")
 
-    def grow(self, height: float = 0.8) -> None:
+    def grow(self, height: float = 30) -> None:
         self._height = round(self._height + height)
         self._stats._grow += 1
 
-    def age(self, age: int = 1) -> None:
+    def age(self, age: int = 20) -> None:
         self._age = age + self._age
         self._stats._age += 1
+
+    def display_stats(self) -> None:
+        self._stats.display(self._name)
 
     @staticmethod
     def is_older(age: int) -> bool:
@@ -65,9 +68,6 @@ class Plant:
 
     def show(self) -> None:
         print(f"{self._name}: {self._height:.1f}cm, {self._age} days old")
-
-    def display_stats(self) -> None:
-        self._stats.display(self._name)
 
 
 class Flower (Plant):
@@ -101,14 +101,14 @@ class Seed (Flower):
     def show(self) -> None:
         super().show()
         print(f"Seeds: {self._seeds}")
-        self._stats._show += 1
 
     def grow_age_bloom(self) -> None:
-        self._stats._grow += 1
-        self._stats._age += 1
+        self.grow()
+        self.age()
+        self.bloom()
+        self._stats._grow -= 1
         self._seeds += 42
         self._height += 30
-        self._age += 20
         self._bloom = True
         print("[make sunflower grow, age and bloom]")
 
@@ -161,8 +161,13 @@ if __name__ == "__main__":
     oak._stats.display(oak._name)
     print("")
     sunflower = Seed("sunflower", 80, 45, "yellow")
-    print("=== Seed")
+    print("\n=== Seed")
     sunflower.show()
     sunflower.grow_age_bloom()
     sunflower.show()
     sunflower._stats.display(sunflower._name)
+    print("\n=== Anonymous")
+    anonymous = Plant.anonymous_plant()
+    anonymous.show()
+    anonymous._stats.display(anonymous._name)
+
