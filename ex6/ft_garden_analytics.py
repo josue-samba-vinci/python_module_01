@@ -7,7 +7,8 @@ class Plant:
 
         def display(self, name) -> None:
             print(f" [statistics for {name}]")
-            print(f"Stats: {self._grow} grow, {self._age} age, {self._show} show")
+            print(f"Stats: {self._grow} grow, {self._age} age, "
+                  f"{self._show} show")
 
     def __init__(self, name: str, height: float, age: int) -> None:
         self._name = name
@@ -68,6 +69,7 @@ class Plant:
 
     def show(self) -> None:
         print(f"{self._name}: {self._height:.1f}cm, {self._age} days old")
+        self._stats._show += 1
 
 
 class Flower (Plant):
@@ -85,7 +87,6 @@ class Flower (Plant):
     def show(self) -> None:
         super().show()
         print(f" Color: {self._color}")
-        self._stats._show += 1
         if self._bloom:
             print(f" {self._name} is blooming beautifully!")
         else:
@@ -138,7 +139,6 @@ class Tree (Plant):
     def show(self) -> None:
         super().show()
         print(f"Trunk diameter: {self._trunk_diameter:.1f} cm")
-        self._stats._show += 1
 
 
 if __name__ == "__main__":
